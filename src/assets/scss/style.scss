@@ -4,6 +4,9 @@
     --input-padding-x: .75rem;
     --input-padding-y: .75rem;
 }
+body{
+    background: #f5f5f5;
+}
 .jumbotron {
     padding-top: var(--jumbotron-padding-y);
     padding-bottom: var(--jumbotron-padding-y);

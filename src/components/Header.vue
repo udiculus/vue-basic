@@ -2,8 +2,8 @@
     <header>
         <div class="navbar navbar-dark bg-dark box-shadow">
             <div class="container d-flex justify-content-between">
-                <a class="navbar-brand d-flex align-items-center" href=""> <strong>Vue Basic - CDC</strong></a>
-                <a class="sign-in-btn" href="login">Sign In</a>
+                <router-link to="/" class="navbar-brand d-flex align-items-center"><strong>Vue Basic - CDC</strong></router-link>
+                <router-link to="/login" class="sign-in-btn">Sign In</router-link>
             </div>
         </div>
     </header>
