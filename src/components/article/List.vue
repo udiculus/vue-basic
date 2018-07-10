@@ -20,6 +20,11 @@
                 </div>
             </div>
         </div>
+        <b-modal v-model="showDelete" title="Delete Confirmation" @ok="handleDeleteArticle">
+            <b-container fluid>
+                <p class="my-4">Are you sure you want to delete the selected article?</p>
+            </b-container>
+        </b-modal>
     </div>
 </template>
 
@@ -28,7 +33,10 @@
         name: "List",
         data() {
             return {
-                articles: []
+                articles: [],
+                deleteCaption: "",
+                showDelete: false,
+                deleteSelectedArticle: null
             }
         },
         methods: {
@@ -49,6 +57,16 @@
             },
             deleteArticle(articleId) {
                 console.log('do nothing for now...');
+                this.showDelete = true;
+                this.deleteSelectedArticle = articleId;
+            },
+            handleDeleteArticle(evt) {
+                evt.preventDefault();
+                if (!this.deleteSelectedArticle) {
+                    alert("You didn't select the article");
+                } else {
+                    // do XHR Request
+                }
             }
         },
         created() {

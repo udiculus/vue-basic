@@ -47,7 +47,7 @@
         },
         methods: {
             fetchData() {
-                this.$http.get('article/1')
+                this.$http.get('article/' + this.$route.params.id)
                     .then(response => {
                         return response.json();
                     })
