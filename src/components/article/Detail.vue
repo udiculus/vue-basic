@@ -49,18 +49,18 @@
             fetchData() {
                 this.$http.get('article/' + this.$route.params.id)
                     .then(response => {
-                        return response.json();
+                        return response.json()
                     })
                     .then(data => {
-                        this.id = data.data.id;
-                        this.title = data.data.title;
-                        this.body = data.data.body;
-                        this.comments = data.data.comments;
-                    });
+                        this.id = data.data.id
+                        this.title = data.data.title
+                        this.body = data.data.body
+                        this.comments = data.data.comments
+                    })
             }
         },
         created() {
-            this.fetchData();
+            this.fetchData()
         }
     }
 </script>

@@ -43,49 +43,48 @@
         },
         methods: {
             submitForm() {
-                this.clearFormError();
+                this.clearFormError()
                 this.$http.post("article/update", {id: this.id, title: this.title, content: this.content}, {
                     emulateJSON: true
                 })
                     .then(response => {
-                        return response.json();
+                        return response.json()
                     })
                     .then(data => {
                         if (data.errorcode > 0) {
-                            console.log(data.form_error);
                             for (var key in data.form_error) {
                                 if (data.form_error.hasOwnProperty(key)) {
-                                    this.error[key].status = true;
-                                    this.error[key].message = data.form_error[key];
+                                    this.error[key].status = true
+                                    this.error[key].message = data.form_error[key]
                                 }
                             }
                         } else {
-                            this.$router.push({name: 'ViewArticle', params: {id: this.$route.params.id}});
+                            this.$router.push({name: 'ViewArticle', params: {id: this.$route.params.id}})
                         }
-                    });
+                    })
             },
             fetchData() {
                 this.$http.get('article/' + this.$route.params.id)
                     .then(response => {
-                        return response.json();
+                        return response.json()
                     })
                     .then(data => {
-                        this.id = data.data.id;
-                        this.title = data.data.title;
-                        this.content = data.data.body;
+                        this.id = data.data.id
+                        this.title = data.data.title
+                        this.content = data.data.body
                     });
             },
             clearFormError() {
                 for (var key in this.error) {
                     if (this.error.hasOwnProperty(key)) {
-                        this.error[key].status = false;
-                        this.error[key].message = "";
+                        this.error[key].status = false
+                        this.error[key].message = ""
                     }
                 }
             }
         },
         created() {
-            this.fetchData();
+            this.fetchData()
         }
     }
 </script>

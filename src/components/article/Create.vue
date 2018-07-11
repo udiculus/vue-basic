@@ -42,32 +42,31 @@
         },
         methods: {
             submitForm() {
-                this.clearFormError();
+                this.clearFormError()
                 this.$http.post("article/create", {title: this.title, content: this.content}, {
                     emulateJSON: true
                 })
                     .then(response => {
-                        return response.json();
+                        return response.json()
                     })
                     .then(data => {
                         if (data.errorcode > 0) {
-                            console.log(data.form_error);
                             for (var key in data.form_error) {
                                 if (data.form_error.hasOwnProperty(key)) {
-                                    this.error[key].status = true;
-                                    this.error[key].message = data.form_error[key];
+                                    this.error[key].status = true
+                                    this.error[key].message = data.form_error[key]
                                 }
                             }
                         } else {
-                            this.$router.push({name: 'Article'});
+                            this.$router.push({name: 'Article'})
                         }
-                    });
+                    })
             },
             clearFormError() {
                 for (var key in this.error) {
                     if (this.error.hasOwnProperty(key)) {
-                        this.error[key].status = false;
-                        this.error[key].message = "";
+                        this.error[key].status = false
+                        this.error[key].message = ""
                     }
                 }
             }
