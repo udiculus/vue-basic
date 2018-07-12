@@ -35,26 +35,24 @@
 </template>
 
 <script>
+    import {mapState, mapActions} from 'vuex'
+
     export default {
         name: "List",
         data() {
             return {
-                articles: [],
                 deleteCaption: "",
                 showDelete: false,
                 deleteSelectedArticle: null
             }
         },
+        computed: {
+            ...mapState({
+                articles: state => state.article.articles
+            }),
+        },
         methods: {
-            fetchData() {
-                this.$http.get('article')
-                    .then(response => {
-                        return response.json()
-                    })
-                    .then(data => {
-                        this.articles = data.data
-                    })
-            },
+            ...mapActions('article', ['removeArticle']),
             viewArticle(articleId) {
                 this.$router.push({name: 'ViewArticle', params: {id: articleId}})
             },
@@ -62,33 +60,24 @@
                 this.$router.push({name: 'EditArticle', params: {id: articleId}})
             },
             deleteArticle(indexId) {
-                console.log('do nothing for now...')
                 this.showDelete = true
                 this.deleteSelectedArticle = indexId
             },
             handleDeleteArticle(evt) {
                 evt.preventDefault()
-                var articleId = this.articles[this.deleteSelectedArticle].id;
                 if (this.deleteSelectedArticle < 0) {
                     alert("You didn't select the article")
                 } else {
-                    this.$http.get('article/delete/' + articleId)
-                        .then(response => {
-                            return response.json()
-                        })
-                        .then(data => {
-                            if (data.errorcode > 0)
-                                alert("Unable to delete the article")
-                            else {
-                                this.$refs.modalDelete.hide()
-                                this.$delete(this.articles, this.deleteSelectedArticle)
-                            }
-                        })
+                    this.removeArticle(this.deleteSelectedArticle).then(() => {
+                        this.$refs.modalDelete.hide()
+                    },(error) => {
+                        alert(error)
+                    })
                 }
             }
         },
         created() {
-            this.fetchData()
+            this.$store.dispatch('article/getAllArticles')
         }
     }
 </script>
