@@ -51,10 +51,11 @@ const mutations = {
         state.articles.splice(indexId, 1)
     },
     viewArticle (state, article) {
-        state.article.id = article.id
-        state.article.title = article.title
-        state.article.body = article.body
-        state.article.comments = article.comments
+        state.article = article
+        // state.article.id = article.id
+        // state.article.title = article.title
+        // state.article.body = article.body
+        // state.article.comments = article.comments
     }
 }
 

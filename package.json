@@ -16,6 +16,8 @@
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.11",
     "node-sass": "^4.9.2",
+    "rxjs": "^6.2.1",
+    "rxjs-compat": "^6.0.0-tactical-rc.1",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "vue": "^2.5.2",

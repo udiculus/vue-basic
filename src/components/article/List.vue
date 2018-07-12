@@ -1,6 +1,7 @@
 <template>
     <div class="album py-5 bg-light">
         <div class="container">
+            <div>Count: {{count}}</div>
             <div class="row">
                 <div class="col-md-4" v-for="(article, index) in articles" :key="article.id">
                     <div class="card mb-4 box-shadow">
@@ -36,6 +37,8 @@
 
 <script>
     import {mapState, mapActions} from 'vuex'
+    import {Observable} from 'rxjs/observable'
+    import 'rxjs/add/observable/interval'
 
     export default {
         name: "List",
@@ -43,7 +46,8 @@
             return {
                 deleteCaption: "",
                 showDelete: false,
-                deleteSelectedArticle: null
+                deleteSelectedArticle: null,
+                count: 0
             }
         },
         computed: {
@@ -70,7 +74,7 @@
                 } else {
                     this.removeArticle(this.deleteSelectedArticle).then(() => {
                         this.$refs.modalDelete.hide()
-                    },(error) => {
+                    }, (error) => {
                         alert(error)
                     })
                 }
@@ -78,6 +82,10 @@
         },
         created() {
             this.$store.dispatch('article/getAllArticles')
+            const obs = Observable.interval(1000)
+            obs.subscribe(
+                (value) => this.count = value
+            )
         }
     }
 </script>
