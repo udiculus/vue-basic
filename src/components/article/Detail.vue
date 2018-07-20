@@ -8,7 +8,7 @@
         <div>
             <div class="container">
                 <div class="article-content">
-                    {{ article.body }}
+                    {{ article.content }}
                 </div>
                 <div class="article-post-comment">
                     <form class="form form-comment" method="POST" action="article/comment" modelAttribute="comment" id="form_comment">
